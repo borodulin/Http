@@ -1,0 +1,34 @@
+{
+    "name": "borodulin/http",
+    "description": "PSR HTTP Message",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andrey Borodulin",
+            "email": "borodulin@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.3",
+        "psr/http-factory": "^1.0",
+        "psr/http-message": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.2",
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "phpstan/phpstan": "^0.12.25",
+        "phpunit/phpcov": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Borodulin\\Http\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Borodulin\\Http\\Tests\\": "tests/"
+        }
+    }
+}
