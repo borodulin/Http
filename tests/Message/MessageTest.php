@@ -43,31 +43,33 @@ class MessageTest extends TestCase
 
     public function testWithoutHeader(): void
     {
-        $message = new Message((new StreamFactory())->createStream('test'));
-
+        $message = new Message((new StreamFactory())->createStream('test'), ['test' => []]);
+        $this->assertFalse($message->withoutHeader('test')->hasHeader('test'));
+        $this->assertTrue($message->hasHeader('test'));
     }
 
     public function testGetHeaderLine(): void
     {
+        $message = new Message((new StreamFactory())->createStream('test'), ['test' => ['1', '2']]);
+        $this->assertEquals('1,2', $message->getHeaderLine('test'));
     }
 
     public function testWithHeader(): void
     {
+        $message = new Message((new StreamFactory())->createStream('test'), ['test' => ['1', '2']]);
+        $this->assertEquals('3', $message->withHeader('test', '3')->getHeaderLine('test'));
+        $this->assertEquals('1,2', $message->getHeaderLine('test'));
     }
 
     public function testWithAddedHeader(): void
     {
-    }
-
-    public function testGetProtocolVersion(): void
-    {
+        $message = new Message((new StreamFactory())->createStream('test'), ['test' => ['1', '2']]);
+        $this->assertEquals('1,2,4', $message->withAddedHeader('test', '4')->getHeaderLine('test'));
     }
 
     public function testGetHeaders(): void
     {
-    }
-
-    public function testGetBody(): void
-    {
+        $message = new Message((new StreamFactory())->createStream('test'), ['test' => ['1', '2']]);
+        $this->assertIsArray($message->getHeaders());
     }
 }

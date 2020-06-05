@@ -163,7 +163,7 @@ class Message implements MessageInterface
     {
         $clone = clone $this;
 
-        $clone->headers[strtolower($name)] = $value;
+        $clone->headers[strtolower($name)] = (array) $value;
 
         return $clone;
     }
@@ -190,7 +190,7 @@ class Message implements MessageInterface
     {
         $clone = clone $this;
         $name = strtolower($name);
-        $this->headers[$name] = array_merge($this->headers[$name] ?? [], (array) $value);
+        $clone->headers[$name] = array_merge($clone->headers[$name] ?? [], (array) $value);
 
         return $clone;
     }
@@ -211,7 +211,7 @@ class Message implements MessageInterface
     public function withoutHeader($name)
     {
         $clone = clone $this;
-        unset($this->headers[strtolower($name)]);
+        unset($clone->headers[strtolower($name)]);
 
         return $clone;
     }

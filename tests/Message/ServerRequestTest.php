@@ -1,75 +1,62 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Borodulin\Http\Tests\Message;
 
-use Borodulin\Http\Message\ServerRequest;
 use PHPUnit\Framework\TestCase;
 
 class ServerRequestTest extends TestCase
 {
-
-    public function testGetCookieParams()
+    public function testGetCookieParams(): void
     {
-
     }
 
-    public function testGetUploadedFiles()
+    public function testGetUploadedFiles(): void
     {
-
     }
 
-    public function testWithUploadedFiles()
+    public function testWithUploadedFiles(): void
     {
-
     }
 
-    public function testGetServerParams()
+    public function testGetServerParams(): void
     {
-
     }
 
-    public function testWithCookieParams()
+    public function testWithCookieParams(): void
     {
-
     }
 
-    public function testGetAttributes()
+    public function testGetAttributes(): void
     {
-
     }
 
-    public function testGetAttribute()
+    public function testGetAttribute(): void
     {
-
     }
 
-    public function testGetQueryParams()
+    public function testGetQueryParams(): void
     {
-
     }
 
-    public function testWithQueryParams()
+    public function testWithQueryParams(): void
     {
-
     }
 
-    public function testWithAttribute()
+    public function testWithAttribute(): void
     {
-
     }
 
-    public function testGetParsedBody()
+    public function testGetParsedBody(): void
     {
-
     }
 
-    public function testWithParsedBody()
+    public function testWithParsedBody(): void
     {
-
     }
 
-    public function testWithoutAttribute()
+    public function testWithoutAttribute(): void
     {
-
     }
 }
