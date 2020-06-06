@@ -30,49 +30,45 @@ class UriTest extends TestCase
 
     public function testWithUserInfo(): void
     {
-    }
-
-    public function testGetPath(): void
-    {
+        $uri = new Uri('ssh://test:test@localhost:80/path');
+        $this->assertEquals('user1', $uri->withUserInfo('user1')->getUserInfo());
+        $this->assertEquals('user1:pass', $uri->withUserInfo('user1', 'pass')->getUserInfo());
+        $this->assertEquals('test:test', $uri->getUserInfo());
     }
 
     public function testWithFragment(): void
     {
-    }
-
-    public function testGetPort(): void
-    {
-    }
-
-    public function testGetQuery(): void
-    {
+        $uri = new Uri('ssh://test:test@localhost:80/path');
+        $this->assertEquals('frag', $uri->withFragment('frag')->getFragment());
+        $this->assertEquals('', $uri->getFragment());
     }
 
     public function testWithQuery(): void
     {
-    }
-
-    public function testGetFragment(): void
-    {
-    }
-
-    public function testGetScheme(): void
-    {
+        $uri = new Uri('ssh://test:test@localhost:80/path?id=1');
+        $this->assertEquals('query', $uri->withQuery('query')->getQuery());
+        $this->assertEquals('id=1', $uri->getQuery());
     }
 
     public function testWithHost(): void
     {
-    }
-
-    public function testGetUserInfo(): void
-    {
+        $uri = new Uri('ssh://test:test@localhost:80/path?id=1');
+        $this->assertEquals('ya.ru', $uri->withHost('ya.ru')->getHost());
+        $this->assertEquals('localhost', $uri->getHost());
     }
 
     public function testWithScheme(): void
     {
+        $uri = new Uri('ssh://test:test@localhost:80');
+        $this->assertEquals('http', $uri->withScheme('http')->getScheme());
+        $this->assertEquals('ssh', $uri->getScheme());
     }
 
     public function testWithPort(): void
     {
+        $uri = new Uri('ssh://test:test@localhost:80');
+        $this->assertEquals(443, $uri->withPort(443)->getPort());
+        $this->assertEquals(80, $uri->getPort());
+        $this->assertEquals('ssh://test:test@localhost:22', (string) $uri->withPort(22));
     }
 }

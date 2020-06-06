@@ -1,40 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Borodulin\Http\Tests\Message;
 
-use Borodulin\Http\Message\UploadedFile;
+use Borodulin\Http\Factory\StreamFactory;
+use Borodulin\Http\Factory\UploadedFileFactory;
 use PHPUnit\Framework\TestCase;
 
 class UploadedFileTest extends TestCase
 {
-
-    public function testGetError()
+    public function testUploadedFile(): void
     {
-
-    }
-
-    public function testGetClientMediaType()
-    {
-
-    }
-
-    public function testMoveTo()
-    {
-
-    }
-
-    public function testGetClientFilename()
-    {
-
-    }
-
-    public function testGetStream()
-    {
-
-    }
-
-    public function testGetSize()
-    {
-
+        $uploadedFile = (new UploadedFileFactory())
+            ->createUploadedFile((new StreamFactory())->createStream());
+        $this->assertNull($uploadedFile->getSize());
+        $this->assertNull($uploadedFile->getClientFilename());
+        $this->assertNull($uploadedFile->getClientMediaType());
+        $this->assertEquals(0, $uploadedFile->getError());
     }
 }

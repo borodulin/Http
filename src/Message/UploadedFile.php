@@ -66,6 +66,7 @@ class UploadedFile implements UploadedFileInterface
         if (!$this->stream instanceof StreamInterface) {
             throw new \RuntimeException('No stream is available.');
         }
+
         return $this->stream;
     }
 
@@ -105,7 +106,7 @@ class UploadedFile implements UploadedFileInterface
      */
     public function moveTo($targetPath): void
     {
-        // TODO: Implement moveTo() method.
+        file_put_contents($targetPath, (string) $this->stream);
     }
 
     /**

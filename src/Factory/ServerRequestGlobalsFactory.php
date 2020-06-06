@@ -62,13 +62,13 @@ class ServerRequestGlobalsFactory
             $body,
             $this->getMethod($headers, $server),
             $headers,
-            $this->getProtocolVersion($server),
             $server,
             $cookie,
             $get,
             $this->getUploadedFiles($files),
             [],
-            $post
+            $post,
+            $this->getProtocolVersion($server)
         );
     }
 
