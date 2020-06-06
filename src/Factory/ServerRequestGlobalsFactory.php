@@ -167,13 +167,12 @@ class ServerRequestGlobalsFactory
         }
         $scriptFile = $server['SCRIPT_FILENAME'];
         $scriptName = basename($scriptFile);
-        if (isset($server['SCRIPT_NAME']) && basename($server['SCRIPT_NAME']) === $scriptName) {
-            return $server['SCRIPT_NAME'];
-        } elseif (isset($server['PHP_SELF']) && basename($server['PHP_SELF']) === $scriptName) {
-            return $server['PHP_SELF'];
-        } elseif (isset($server['ORIG_SCRIPT_NAME']) && basename($server['ORIG_SCRIPT_NAME']) === $scriptName) {
-            return $server['ORIG_SCRIPT_NAME'];
-        } elseif (isset($server['PHP_SELF']) && false !== ($pos = strpos($server['PHP_SELF'], '/'.$scriptName))) {
+        foreach (['SCRIPT_NAME', 'PHP_SELF', 'ORIG_SCRIPT_NAME'] as $key) {
+            if (isset($server[$key]) && basename($server[$key]) === $scriptName) {
+                return $server[$key];
+            }
+        }
+        if (isset($server['PHP_SELF']) && false !== ($pos = strpos($server['PHP_SELF'], '/'.$scriptName))) {
             return substr($server['SCRIPT_NAME'], 0, $pos).'/'.$scriptName;
         } elseif (!empty($server['DOCUMENT_ROOT']) && 0 === strpos($scriptFile, $server['DOCUMENT_ROOT'])) {
             return str_replace([$server['DOCUMENT_ROOT'], '\\'], ['', '/'], $scriptFile);
