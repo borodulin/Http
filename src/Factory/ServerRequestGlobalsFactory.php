@@ -243,12 +243,13 @@ class ServerRequestGlobalsFactory
     {
         if (!\is_array($path)) {
             $stream = is_uploaded_file($path) ? $this->streamFactory->createStreamFromFile($path, 'rb') : null;
+
             return new UploadedFile(
                 $stream,
                 (int) $size,
                 (int) $error,
-                $name,
-                $type
+                \is_string($name) ? $name : null,
+                \is_string($type) ? $type : null
             );
         }
         $result = [];
